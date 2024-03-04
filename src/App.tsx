@@ -1,6 +1,5 @@
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Flex, Text } from "@chakra-ui/layout";
 import PostInput from "./components/PostInput";
-import ProfileIcon from "./assets/profile_icon";
 import Feed from "./components/Feed";
 
 function App() {

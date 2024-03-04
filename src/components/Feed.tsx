@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/layout";
+import { Flex } from "@chakra-ui/layout";
 import Post, { PostType } from "./Post";
 
 type Props = {
