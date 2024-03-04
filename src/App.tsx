@@ -1,25 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Flex, Text } from "@chakra-ui/layout";
+import PostInput from "./components/PostInput";
+import ProfileIcon from "./assets/profile_icon";
+import Feed from "./components/Feed";
 
 function App() {
+  const posts = [
+    {
+      user: {
+        name: "User Name",
+        username: "@user_name",
+      },
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
+    },
+    {
+      user: {
+        name: "User Name",
+        username: "@user_name",
+      },
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
+    },
+    {
+      user: {
+        name: "User Name",
+        username: "@user_name",
+      },
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
+    },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex maxW="500px" flexDir="column" mx="auto">
+      <PostInput />
+      <Text my="20px" fontWeight="semibold">
+        Feed
+      </Text>
+      <Feed posts={posts} />
+    </Flex>
   );
 }
 
