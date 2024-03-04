@@ -1,14 +1,8 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
-import Post from "./Post";
+import Post, { PostType } from "./Post";
 
 type Props = {
-  posts: {
-    user: {
-      name: string;
-      username: string;
-    };
-    content: string;
-  }[];
+  posts: PostType[];
 };
 
 export default function Feed({ posts }: Props) {

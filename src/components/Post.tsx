@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import ProfileIcon from "../assets/profile_icon";
 
-type PostType = {
+export type PostType = {
   user: {
     name: string;
     username: string;
