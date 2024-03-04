@@ -1,8 +1,11 @@
 import { Flex, Text } from "@chakra-ui/layout";
 import PostInput from "./components/PostInput";
 import Feed from "./components/Feed";
+import { Form, useForm } from "react-hook-form";
 
 function App() {
+  const { register, handleSubmit } = useForm();
+
   const posts = [
     {
       user: {
@@ -30,9 +33,15 @@ function App() {
     },
   ];
 
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <Flex maxW="500px" flexDir="column" mx="auto">
-      <PostInput />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <PostInput inputProps={{ ...register("postContent") }} />
+      </form>
       <Text my="20px" fontWeight="semibold">
         Feed
       </Text>
