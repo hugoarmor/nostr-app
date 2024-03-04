@@ -1,12 +1,14 @@
 import { Flex, Text } from "@chakra-ui/layout";
 import PostInput from "./components/PostInput";
 import Feed from "./components/Feed";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 function App() {
   const { register, handleSubmit } = useForm();
+  const [isPublishDisabled, setIsPublishDisabled] = useState(true);
 
-  const posts = [
+  const [posts, setPosts] = useState([
     {
       user: {
         name: "User Name",
@@ -31,16 +33,33 @@ function App() {
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
     },
-  ];
+  ]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    setPosts((prev) => [
+      {
+        user: {
+          name: "User Name",
+          username: "@user_name",
+        },
+        content: data.postContent,
+      },
+      ...prev,
+    ]);
+  };
+
+  const handlePostInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setIsPublishDisabled(target.value.length === 0);
   };
 
   return (
     <Flex maxW="500px" flexDir="column" mx="auto">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <PostInput inputProps={{ ...register("postContent") }} />
+        <PostInput
+          onChange={handlePostInputChange}
+          inputProps={{ ...register("postContent") }}
+          publishDisabled={isPublishDisabled}
+        />
       </form>
       <Text my="20px" fontWeight="semibold">
         Feed

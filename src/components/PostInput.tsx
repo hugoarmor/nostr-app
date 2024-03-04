@@ -6,9 +6,15 @@ import { Button } from "@chakra-ui/button";
 
 export type Props = {
   inputProps: any;
+  publishDisabled?: boolean;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined;
 };
 
-export default function PostInput({ inputProps }: Props) {
+export default function PostInput({
+  inputProps,
+  publishDisabled,
+  onChange,
+}: Props) {
   return (
     <Box
       display="flex"
@@ -22,6 +28,7 @@ export default function PostInput({ inputProps }: Props) {
         <Box
           w="40px"
           h="40px"
+          flexShrink={0}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -34,6 +41,7 @@ export default function PostInput({ inputProps }: Props) {
         </Box>
         <Textarea
           {...inputProps}
+          onChange={onChange}
           placeholder="Type something..."
           mx="10px"
           fontSize={12}
@@ -51,12 +59,15 @@ export default function PostInput({ inputProps }: Props) {
           w="30px"
           h="30px"
           display="flex"
+          flexShrink={0}
           alignItems="center"
           justifyContent="center"
           borderWidth="1px 0 0 1px"
           borderColor="black"
           borderStyle="solid"
           borderRadius="10px 0 0 0"
+          pointerEvents={publishDisabled ? "none" : "auto"}
+          opacity={publishDisabled ? 0.3 : 1}
         >
           <SendIcon />
         </Button>
