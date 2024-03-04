@@ -3,37 +3,13 @@ import PostInput from "./components/PostInput";
 import Feed from "./components/Feed";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { PostType } from "./components/Post";
 
 function App() {
   const { register, handleSubmit } = useForm();
   const [isPublishDisabled, setIsPublishDisabled] = useState(true);
 
-  const [posts, setPosts] = useState([
-    {
-      user: {
-        name: "User Name",
-        username: "@user_name",
-      },
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
-    },
-    {
-      user: {
-        name: "User Name",
-        username: "@user_name",
-      },
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
-    },
-    {
-      user: {
-        name: "User Name",
-        username: "@user_name",
-      },
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam auctor, libero et vestibulum auctor, libero et vestibulum consectetur, libero et vestibulum",
-    },
-  ]);
+  const [posts, setPosts] = useState<PostType[]>([]);
 
   const onSubmit = (data: any) => {
     setPosts((prev) => [
@@ -64,7 +40,7 @@ function App() {
       <Text my="20px" fontWeight="semibold">
         Feed
       </Text>
-      <Feed posts={posts} />
+      {!posts.length ? <Text>No content to show</Text> : <Feed posts={posts} />}
     </Flex>
   );
 }
