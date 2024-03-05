@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# nostr-app
+This is a custom implementation of a simple nostr client. It acts as a simplified posting app.
+<br>
+The idea is to show that with a client connection to a relay being set, you can emit the events and listen them to apply the necessary changes.
+Please enjoy!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## First Steps
+To run the app, first install the dependencies:
+```bash
+yarn
+```
 
-## Available Scripts
+Then you can run the app locally by simply running:
+```bash
+yarn start
+```
 
-In the project directory, you can run:
+Than you can access the app at http://localhost:3000 or whatever is the available port.
 
-### `yarn start`
+## Architecture Decisions
+For making this application, while using react, it was defined to have the business logics for each module separated in a service `ts` file with the respective classes.
+The reason for this decision is to have a contract designing for simplifying it's implementation and possible refactoring to any other type of implementation.
+These examples can be seen in the `src/services/` folder with the crypto and nostr-client services.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+One other important decision was to separate the nostr client into a context for itself, the idea is to enforce a singleton logic for the nostr-client once tha app component is mounted.
+With that, the access of this client can be made via hook with `useNostrClient`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Challenges
+The main challenge was to have a better definition of the basics of `nostr` itself, because it seemed kind of blurry at first. But after a few studies on this topic, I was able to identify the main ideas of `nostr` working itself as a protocol, a set of good practices to run client communications with transparency and security.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Then after that it was only a matter of designing a simple scenario of just posting a simple text, sending it as an event to a chosen relay and also listening to the event to persist the change into the app feed.
+Of course the idea is to also have these listeners on some other servers, but for understanding purposes, the defined scope was enough.
