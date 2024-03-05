@@ -1,15 +1,15 @@
 import { Flex, Text } from "@chakra-ui/layout";
 import PostInput from "./components/post-input";
 import Feed from "./components/feed";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { PostType } from "./components/post";
 import { useNostrClient } from "./hooks/use-nostr-client";
 
 function App() {
   const { register, handleSubmit, reset } = useForm();
-  const [isPublishDisabled, setIsPublishDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [postInputValue, setPostInputValue] = useState("");
 
   const [posts, setPosts] = useState<PostType[]>([]);
 
@@ -20,14 +20,12 @@ function App() {
 
     setPosts((prev) => [post, ...prev]);
     setIsLoading(false);
-
-    reset();
   };
 
   const handlePostInputChange = ({
     target,
   }: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setIsPublishDisabled(target.value.length === 0);
+    setPostInputValue(target.value);
   };
 
   const onSubmit = (data: any) => {
@@ -42,6 +40,8 @@ function App() {
     });
 
     nostrClient.publish(eventContent);
+    setPostInputValue("");
+    reset()
   };
 
   useEffect(() => {
@@ -54,11 +54,15 @@ function App() {
 
   return (
     <Flex maxW="500px" flexDir="column" mx="auto" py="40px">
+      <Text mb="20px" fontWeight="semibold">
+        Hey! What's on your mind?
+      </Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <PostInput
+          value={postInputValue}
           onChange={handlePostInputChange}
           inputProps={{ ...register("postContent") }}
-          publishDisabled={isLoading || isPublishDisabled}
+          publishDisabled={isLoading || postInputValue.length === 0}
         />
       </form>
       <Text my="20px" fontWeight="semibold">

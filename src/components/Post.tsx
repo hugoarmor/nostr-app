@@ -15,7 +15,7 @@ type Props = {
 
 export default function Post({ body }: Props) {
   return (
-    <Flex boxShadow="0px 5px 30px -15px rgba(0,0,0,0.50)" borderRadius="10px" minH="96px">
+    <Flex border="1px solid #346559" borderRadius="10px" minH="96px">
       <Box
         w="40px"
         h="40px"
@@ -23,8 +23,9 @@ export default function Post({ body }: Props) {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        bg="#F5F5F5"
         borderRadius="10px 0 10px 0"
+        borderWidth="0 1px 1px 0"
+        borderColor="#346559"
       >
         <ProfileIcon color="#346559" />
       </Box>
