@@ -9,6 +9,7 @@ import { useNostrClient } from "./hooks/use-nostr-client";
 function App() {
   const { register, handleSubmit } = useForm();
   const [isPublishDisabled, setIsPublishDisabled] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [posts, setPosts] = useState<PostType[]>([]);
 
@@ -18,6 +19,7 @@ function App() {
     const post = JSON.parse(content);
 
     setPosts((prev) => [post, ...prev]);
+    setIsLoading(false);
   };
 
   const handlePostInputChange = ({
@@ -27,6 +29,8 @@ function App() {
   };
 
   const onSubmit = (data: any) => {
+    setIsLoading(true);
+
     const eventContent = JSON.stringify({
       user: {
         name: "User Name",
@@ -47,12 +51,12 @@ function App() {
   });
 
   return (
-    <Flex maxW="500px" flexDir="column" mx="auto" pt="40px">
+    <Flex maxW="500px" flexDir="column" mx="auto" py="40px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <PostInput
           onChange={handlePostInputChange}
           inputProps={{ ...register("postContent") }}
-          publishDisabled={isPublishDisabled}
+          publishDisabled={isLoading || isPublishDisabled}
         />
       </form>
       <Text my="20px" fontWeight="semibold">
