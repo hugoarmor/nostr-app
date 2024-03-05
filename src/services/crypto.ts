@@ -13,8 +13,6 @@ export class Crypto {
     const publicKey = keys.getPublic("hex").substring(2).substring(0, 64);
     const privateKey = keys.getPrivate("hex");
 
-    console.log({ publicKey, privateKey });
-
     return { publicKey, privateKey };
   }
 
