@@ -20,13 +20,11 @@ function App() {
     setPosts((prev) => [post, ...prev]);
   };
 
-  useEffect(() => {
-    const uuid = nostrClient.registerHandler(handleNewPost);
-
-    return () => {
-      nostrClient.unregisterHandler(uuid);
-    };
-  });
+  const handlePostInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setIsPublishDisabled(target.value.length === 0);
+  };
 
   const onSubmit = (data: any) => {
     const eventContent = JSON.stringify({
@@ -40,11 +38,13 @@ function App() {
     nostrClient.publish(eventContent);
   };
 
-  const handlePostInputChange = ({
-    target,
-  }: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setIsPublishDisabled(target.value.length === 0);
-  };
+  useEffect(() => {
+    const uuid = nostrClient.registerHandler(handleNewPost);
+
+    return () => {
+      nostrClient.unregisterHandler(uuid);
+    };
+  });
 
   return (
     <Flex maxW="500px" flexDir="column" mx="auto">
