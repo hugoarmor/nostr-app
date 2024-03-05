@@ -3,15 +3,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
+import { NostrClientProvider } from "./context/nostr-client";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
+    <NostrClientProvider relay="wss://relay.nostr.net">
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
+    </NostrClientProvider>
   </React.StrictMode>
 );
 
