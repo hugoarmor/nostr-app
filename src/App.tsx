@@ -47,7 +47,7 @@ function App() {
   });
 
   return (
-    <Flex maxW="500px" flexDir="column" mx="auto">
+    <Flex maxW="500px" flexDir="column" mx="auto" pt="40px">
       <form onSubmit={handleSubmit(onSubmit)}>
         <PostInput
           onChange={handlePostInputChange}

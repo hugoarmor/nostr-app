@@ -22,7 +22,7 @@ export default function PostInput({
       w="100%"
       minH="130px"
       borderRadius="10px"
-      border="1px solid black"
+      boxShadow="0px 5px 30px -15px rgba(0,0,0,0.50)"
     >
       <Flex>
         <Box
@@ -32,12 +32,10 @@ export default function PostInput({
           display="flex"
           alignItems="center"
           justifyContent="center"
-          borderWidth="0 1px 1px 0"
-          borderColor="black"
-          borderStyle="solid"
-          borderRadius="0 0 10px 0"
+          bg="#F5F5F5"
+          borderRadius="10px 0 10px 0"
         >
-          <ProfileIcon />
+          <ProfileIcon color="#346559" />
         </Box>
         <Textarea
           {...inputProps}
@@ -54,7 +52,7 @@ export default function PostInput({
         <Button
           type="submit"
           variant="unstyled"
-          bg="unset"
+          bg="#6EFFDC"
           p={0}
           w="30px"
           h="30px"
@@ -62,14 +60,11 @@ export default function PostInput({
           flexShrink={0}
           alignItems="center"
           justifyContent="center"
-          borderWidth="1px 0 0 1px"
-          borderColor="black"
-          borderStyle="solid"
-          borderRadius="10px 0 0 0"
+          borderRadius="10px 0 10px 0"
           pointerEvents={publishDisabled ? "none" : "auto"}
           opacity={publishDisabled ? 0.3 : 1}
         >
-          <SendIcon />
+          <SendIcon color="#346559" />
         </Button>
       </Flex>
     </Box>

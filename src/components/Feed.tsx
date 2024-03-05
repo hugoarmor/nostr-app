@@ -10,14 +10,12 @@ export default function Feed({ posts }: Props) {
     <Flex
       flexDir="column"
       w="100%"
-      border="1px solid black"
-      borderRadius="10px"
+      gap={5}
     >
       {posts.map((post, index) => (
         <Post
           key={`post-${index}`}
           body={post}
-          options={{ borderBottom: index !== posts.length - 1 }}
         />
       ))}
     </Flex>
