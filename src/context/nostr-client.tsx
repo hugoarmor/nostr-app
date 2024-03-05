@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { NostrClient } from "../services/nostr";
+import { NostrClient } from "../services/nostr-client";
 
 type NostrClientProviderProps = {
   relay: string;
