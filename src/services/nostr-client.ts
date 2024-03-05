@@ -34,11 +34,11 @@ export class NostrClient {
     });
 
     this.socket.addEventListener("message", (message) => {
-      let [_type, _subId, event] = JSON.parse(message.data as string);
+      let [,, event] = JSON.parse(message.data as string);
 
-      if (!event || event == true) return;
+      if (!event || event === true) return;
 
-      let { _kind, content } = event ?? {};
+      let { content } = event ?? {};
 
       this.messageHandlers.forEach((handler) => handler(content ?? {}));
     });
