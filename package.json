@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@types/elliptic": "^6.4.18"
+    "@types/elliptic": "^6.4.18",
+    "@types/uuid": "^9.0.8"
   }
 }
