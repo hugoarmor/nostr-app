@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/layout";
 import PostInput from "./components/post-input";
 import Feed from "./components/feed";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { PostType } from "./components/post";
 import { useNostrClient } from "./hooks/use-nostr-client";
