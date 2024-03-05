@@ -53,7 +53,7 @@ export class NostrClient {
       content: content,
     };
 
-    let signedEvent = await this.getSignedEvent(event, this.keyPair.privateKey);
+    let signedEvent = await this.signEvent(event, this.keyPair.privateKey);
 
     this.socket.send(JSON.stringify(["EVENT", signedEvent]));
   }
@@ -69,7 +69,7 @@ export class NostrClient {
     this.messageHandlers.delete(uuid);
   }
 
-  private async getSignedEvent(event: NostrEvent, privateKey: Hex) {
+  private async signEvent(event: NostrEvent, privateKey: Hex) {
     let eventData = JSON.stringify([
       0,
       event.pubkey,
