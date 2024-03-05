@@ -7,7 +7,7 @@ import { PostType } from "./components/post";
 import { useNostrClient } from "./hooks/use-nostr-client";
 
 function App() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [isPublishDisabled, setIsPublishDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,6 +20,8 @@ function App() {
 
     setPosts((prev) => [post, ...prev]);
     setIsLoading(false);
+
+    reset();
   };
 
   const handlePostInputChange = ({
