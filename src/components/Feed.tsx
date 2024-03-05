@@ -15,6 +15,7 @@ export default function Feed({ posts }: Props) {
     >
       {posts.map((post, index) => (
         <Post
+          key={`post-${index}`}
           body={post}
           options={{ borderBottom: index !== posts.length - 1 }}
         />
