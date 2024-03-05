@@ -2,8 +2,9 @@ import { Flex, Text } from "@chakra-ui/layout";
 import PostInput from "./components/post-input";
 import Feed from "./components/feed";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PostType } from "./components/post";
+import { useNostrClient } from "./hooks/use-nostr-client";
 
 function App() {
   const { register, handleSubmit } = useForm();
@@ -11,20 +12,37 @@ function App() {
 
   const [posts, setPosts] = useState<PostType[]>([]);
 
-  const onSubmit = (data: any) => {
-    setPosts((prev) => [
-      {
-        user: {
-          name: "User Name",
-          username: "@user_name",
-        },
-        content: data.postContent,
-      },
-      ...prev,
-    ]);
+  const nostrClient = useNostrClient();
+
+  const handleNewPost = (content: any) => {
+    const post = JSON.parse(content);
+
+    setPosts((prev) => [post, ...prev]);
   };
 
-  const handlePostInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => {
+  useEffect(() => {
+    const uuid = nostrClient.registerHandler(handleNewPost);
+
+    return () => {
+      nostrClient.unregisterHandler(uuid);
+    };
+  });
+
+  const onSubmit = (data: any) => {
+    const eventContent = JSON.stringify({
+      user: {
+        name: "User Name",
+        username: "@user_name",
+      },
+      content: data.postContent,
+    });
+
+    nostrClient.publish(eventContent);
+  };
+
+  const handlePostInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIsPublishDisabled(target.value.length === 0);
   };
 
