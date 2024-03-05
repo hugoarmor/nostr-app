@@ -1,9 +1,9 @@
 import { Flex, Text } from "@chakra-ui/layout";
-import PostInput from "./components/PostInput";
-import Feed from "./components/Feed";
+import PostInput from "./components/post-input";
+import Feed from "./components/feed";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { PostType } from "./components/Post";
+import { PostType } from "./components/post";
 
 function App() {
   const { register, handleSubmit } = useForm();

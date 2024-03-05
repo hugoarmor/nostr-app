@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/layout";
 import { Textarea } from "@chakra-ui/textarea";
-import ProfileIcon from "../assets/profile_icon";
-import SendIcon from "../assets/send_icon";
+import ProfileIcon from "../assets/profile-icon";
+import SendIcon from "../assets/send-icon";
 import { Button } from "@chakra-ui/button";
 
 export type Props = {

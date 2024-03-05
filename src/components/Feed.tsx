@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/layout";
-import Post, { PostType } from "./Post";
+import Post, { PostType } from "./post";
 
 type Props = {
   posts: PostType[];
